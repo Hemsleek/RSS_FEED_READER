@@ -3,7 +3,7 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      <form>
+      <form className="user-form">
         <div className="form-group">
           <label>URL</label>
           <input type="text" placeholder="Enter Url" />

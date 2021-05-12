@@ -1,3 +1,16 @@
 .App {
   padding:2rem;
 }
+
+.user-form{
+  display:flex;
+  align-items: center;
+}
+.form-group{
+  display:flex;
+  flex-direction: column;
+}
+button{
+  align-self: flex-end;
+  margin-left:1rem;
+}
