@@ -1,6 +1,9 @@
+import { useState } from 'react'
 import './App.css';
 
 function App() {
+  const [feeds, setFeeds] = useState([])
+  
   return (
     <div className="App">
       <form className="user-form">
