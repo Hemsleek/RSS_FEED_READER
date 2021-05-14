@@ -3,16 +3,28 @@ import './App.css';
 
 function App() {
   const [feeds, setFeeds] = useState([])
-  
+
+  const handleRSSAdd = (e) => {
+    e.preventDefault();
+    console.log(e.target.userInput.value)
+  }
+
   return (
     <div className="App">
-      <form className="user-form">
+      <form onSubmit ={ handleRSSAdd } className="user-form">
         <div className="form-group">
           <label>URL</label>
-          <input type="text" placeholder="Enter Url" />
+          <input name="userInput" type="text" placeholder="Enter Url" />
         </div>
-        <button>Add</button>
+        <button type="submit">Add</button>
       </form>
+
+      <div className="rss-feeds">
+        {
+          feeds
+        }
+
+      </div>
 
     </div>
   );
