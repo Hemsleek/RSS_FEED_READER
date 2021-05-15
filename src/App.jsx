@@ -1,17 +1,23 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css';
 
 function App() {
+  const [rssLinks,setRssLinks] = useState([])
   const [feeds, setFeeds] = useState([])
 
-  const handleRSSAdd = (e) => {
+  const handleRSSLinkAdd = (e) => {
     e.preventDefault();
-    console.log(e.target.userInput.value)
+    setRssLinks(rssLinks.concat(e.target.userInput.value))
   }
+
+  useEffect(() => {
+      console.log({rssLinks})
+    
+  }, [rssLinks])
 
   return (
     <div className="App">
-      <form onSubmit ={ handleRSSAdd } className="user-form">
+      <form onSubmit ={ handleRSSLinkAdd } className="user-form">
         <div className="form-group">
           <label>URL</label>
           <input name="userInput" type="text" placeholder="Enter Url" />
