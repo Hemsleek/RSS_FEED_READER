@@ -1,5 +1,11 @@
 import { useState, useEffect } from 'react'
+import Parser from 'rss-parser'
+
+// style
 import './App.css';
+
+const parser = new Parser()
+const CORS_PROXY = "https://cors-anywhere.herokuapp.com/"
 
 function App() {
   const [rssLinks,setRssLinks] = useState([])
@@ -11,7 +17,12 @@ function App() {
   }
 
   useEffect(() => {
-      console.log({rssLinks})
+      // console.log({rssLinks})
+
+      (async () => {
+        const feed = await parser.parseURL(`${CORS_PROXY}https://www.reddit.com/.rss`)
+        console.log(feed.title)
+      })()
     
   }, [rssLinks])
 
