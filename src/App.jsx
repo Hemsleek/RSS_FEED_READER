@@ -7,6 +7,8 @@ import './App.css';
 const parser = new Parser()
 const CORS_PROXY = "https://cors-anywhere.herokuapp.com/"
 
+
+
 function App() {
   const [rssLinks,setRssLinks] = useState([])
   const [feeds, setFeeds] = useState([])
@@ -20,8 +22,8 @@ function App() {
       // console.log({rssLinks})
 
       (async () => {
-        const feed = await parser.parseURL(`${CORS_PROXY}https://www.reddit.com/.rss`)
-        console.log(feed.title)
+        const feed = await parser.parseURL(CORS_PROXY + rssLinks)
+        
       })()
     
   }, [rssLinks])
