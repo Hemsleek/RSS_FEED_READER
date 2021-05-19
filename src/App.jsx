@@ -13,11 +13,17 @@ function App() {
   const [rssLinks,setRssLinks] = useState([])
   const [feeds, setFeeds] = useState([])
 
-  const handleRSSLinkAdd = (e) => {
-    e.preventDefault();
-    setRssLinks(rssLinks.concat(e.target.userInput.value))
-  }
+  
 
+  //get rsslinks from local storage on load
+  useEffect(() => {
+
+    const localRssLinks = localStorage.getItem('rss-links')
+    if(localRssLinks) setRssLinks((prevLinks) => JSON.parse(localRssLinks))
+
+  },[])
+
+  //update feeds on rssChange
   useEffect(() => {
       // console.log({rssLinks})
 
@@ -27,6 +33,12 @@ function App() {
       })()
     
   }, [rssLinks])
+
+
+  const handleRSSLinkAdd = (e) => {
+    e.preventDefault();
+    setRssLinks(rssLinks.concat(e.target.userInput.value))
+  }
 
   return (
     <div className="App">
