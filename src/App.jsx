@@ -24,13 +24,16 @@ function App() {
   },[])
 
   //update feeds on rssChange
+  console.log(rssLinks)
   useEffect(() => {
       // console.log({rssLinks})
-
+      if(rssLinks.length){
       (async () => {
-        const feed = await parser.parseURL(CORS_PROXY + rssLinks)
+        const feed = await parser.parseURL(CORS_PROXY + rssLinks[0])
+        setFeeds(currentfeeds => currentfeeds.concat(feed))
         
       })()
+    }
     
   }, [rssLinks])
 
@@ -52,7 +55,7 @@ function App() {
 
       <div className="rss-feeds">
         {
-          feeds
+          feeds.length? feeds[0]: ''
         }
 
       </div>
