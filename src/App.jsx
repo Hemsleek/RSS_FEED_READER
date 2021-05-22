@@ -30,7 +30,8 @@ function App() {
       if(rssLinks.length){
       (async () => {
         const feed = await parser.parseURL(CORS_PROXY + rssLinks[0])
-        setFeeds(currentfeeds => currentfeeds.concat(feed))
+      setFeeds(currentfeeds => currentfeeds.concat(feed))
+        // console.log({feeds})
         
       })()
     }
@@ -55,7 +56,7 @@ function App() {
 
       <div className="rss-feeds">
         {
-          feeds.length? feeds[0]: ''
+          feeds.length? JSON.stringify(feeds[0], null, 2): ''
         }
 
       </div>
