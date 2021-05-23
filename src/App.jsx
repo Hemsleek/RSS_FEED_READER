@@ -37,11 +37,16 @@ function App() {
 
   const handleRSSLinkAdd = (e) => {
     e.preventDefault();
-    setRssLinks(currentLinks => {
-      const newRssLinks = currentLinks.concat(e.target.userInput.value)
-      localStorage.setItem('rss-links',JSON.stringify(newRssLinks))
-      return newRssLinks
-  })
+    const link = e.target.userInput.value
+    
+    if(!(rssLinks.includes(link))){
+      setRssLinks(currentLinks => {
+        const newRssLinks = currentLinks.concat(link)
+        localStorage.setItem('rss-links',JSON.stringify(newRssLinks))
+        return newRssLinks
+      })
+    }
+
   }
 
   return (
