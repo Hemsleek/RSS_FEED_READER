@@ -13,8 +13,6 @@ function App() {
   const [rssLinks,setRssLinks] = useState([])
   const [feeds, setFeeds] = useState([])
 
-  
-
   //get rsslinks from local storage on load
   useEffect(() => {
 
@@ -22,16 +20,14 @@ function App() {
     if(localRssLinks) setRssLinks((prevLinks) => JSON.parse(localRssLinks))
 
   },[])
-
   //update feeds on rssChange
   console.log(rssLinks)
   useEffect(() => {
-      // console.log({rssLinks})
+
       if(rssLinks.length){
       (async () => {
         const feed = await parser.parseURL(CORS_PROXY + rssLinks[0])
-      setFeeds(currentfeeds => currentfeeds.concat(feed))
-        // console.log({feeds})
+        setFeeds(currentfeeds => currentfeeds.concat(feed))
         
       })()
     }
@@ -41,7 +37,11 @@ function App() {
 
   const handleRSSLinkAdd = (e) => {
     e.preventDefault();
-    setRssLinks(rssLinks.concat(e.target.userInput.value))
+    setRssLinks(currentLinks => {
+      const newRssLinks = currentLinks.concat(e.target.userInput.value)
+      localStorage.setItem('rss-links',JSON.stringify(newRssLinks))
+      return newRssLinks
+  })
   }
 
   return (
@@ -55,6 +55,7 @@ function App() {
       </form>
 
       <div className="rss-feeds">
+        {JSON.stringify(rssLinks)}
         {
           feeds.length? JSON.stringify(feeds[0], null, 2): ''
         }
