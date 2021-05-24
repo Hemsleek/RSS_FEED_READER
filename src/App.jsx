@@ -26,6 +26,7 @@ function App() {
 
       if(rssLinks.length){
       (async () => {
+        //TODO: map feeds
         const feed = await parser.parseURL(CORS_PROXY + rssLinks[0])
         setFeeds(currentfeeds => currentfeeds.concat(feed))
         
@@ -38,7 +39,7 @@ function App() {
   const handleRSSLinkAdd = (e) => {
     e.preventDefault();
     const link = e.target.userInput.value
-    
+
     if(!(rssLinks.includes(link))){
       setRssLinks(currentLinks => {
         const newRssLinks = currentLinks.concat(link)
@@ -62,7 +63,7 @@ function App() {
       <div className="rss-feeds">
         {JSON.stringify(rssLinks)}
         {
-          feeds.length? JSON.stringify(feeds[0], null, 2): ''
+          feeds.title
         }
 
       </div>
