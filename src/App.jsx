@@ -13,23 +13,28 @@ function App() {
   const [rssLinks,setRssLinks] = useState([])
   const [feeds, setFeeds] = useState([])
 
-  //get rsslinks from local storage on load
+  //get rsslinks from local storage on load 
   useEffect(() => {
 
     const localRssLinks = localStorage.getItem('rss-links')
-    if(localRssLinks) setRssLinks((prevLinks) => JSON.parse(localRssLinks))
+    if(localRssLinks) {
+      const parsedLinks = JSON.parse(localRssLinks)
+      setRssLinks((prevLinks) => parsedLinks)
+      setFeeds(prevFeeds => parsedLinks.map( async link => await parser.parseURL(CORS_PROXY + link)))
+      
+    }
 
   },[])
   //update feeds on rssChange
-  console.log(rssLinks)
+  console.log({rssLinks})
+  console.log({feeds})
   useEffect(() => {
 
       if(rssLinks.length){
-      (async () => {
-        //TODO: map feeds
-        const feed = await parser.parseURL(CORS_PROXY + rssLinks[0])
-        setFeeds(currentfeeds => currentfeeds.concat(feed))
-        
+      (async () =>{
+          const feed = await parser.parseURL(CORS_PROXY + rssLinks[rssLinks.length - 1])
+          setFeeds(currentfeeds => currentfeeds.concat(feed))
+  
       })()
     }
     
