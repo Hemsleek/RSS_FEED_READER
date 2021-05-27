@@ -13,14 +13,18 @@ function App() {
   const [rssLinks,setRssLinks] = useState([])
   const [feeds, setFeeds] = useState([])
 
-  //get rsslinks from local storage on load 
+  //get rsslinks from local storage on load and set feeds
   useEffect(() => {
 
     const localRssLinks = localStorage.getItem('rss-links')
     if(localRssLinks) {
       const parsedLinks = JSON.parse(localRssLinks)
       setRssLinks((prevLinks) => parsedLinks)
-      setFeeds(prevFeeds => parsedLinks.map( async link => await parser.parseURL(CORS_PROXY + link)))
+      setFeeds(prevFeeds => parsedLinks.map( async(link) => {
+        const parsedFeed = await parser.parseURL(CORS_PROXY + link)
+        return parsedFeed
+        }
+      ))
       
     }
 
@@ -67,10 +71,7 @@ function App() {
 
       <div className="rss-feeds">
         {JSON.stringify(rssLinks)}
-        {
-          feeds.title
-        }
-
+        
       </div>
 
     </div>
