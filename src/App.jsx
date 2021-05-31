@@ -71,6 +71,13 @@ function App() {
 
       <div className="rss-feeds">
         {JSON.stringify(rssLinks)}
+        {
+          feeds[0].map(({items}) => (
+            items.map(item => (
+              <span>{item.title}</span>
+            ))
+          ))
+        }
         
       </div>
 
