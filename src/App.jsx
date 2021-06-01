@@ -12,6 +12,7 @@ const CORS_PROXY = "https://cors-anywhere.herokuapp.com/"
 function App() {
   const [rssLinks,setRssLinks] = useState([])
   const [feeds, setFeeds] = useState([])
+  const [updateData, setUpdateData] = useState([])
 
   //get rsslinks from local storage on load and set feeds
   useEffect(() => {
@@ -72,10 +73,11 @@ function App() {
       <div className="rss-feeds">
         {JSON.stringify(rssLinks)}
         {
-          feeds[0].map(({items}) => (
-            items.map(item => (
-              <span>{item.title}</span>
-            ))
+          feeds[0].map((feed) => (
+            <div className="feed" onClick={(e) => setUpdateData(feed.items)}>
+              { feed.title}
+            </div>
+            
           ))
         }
         
