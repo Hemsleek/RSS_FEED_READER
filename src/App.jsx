@@ -73,8 +73,8 @@ function App() {
       <div className="rss-feeds">
         {JSON.stringify(rssLinks)}
         {
-          feeds[0].map((feed) => (
-            <div className="feed" onClick={(e) => setUpdateData(feed.items)}>
+          feeds.reverse().map((feed, feedIndex) => (
+            <div  key={`feed-number-${feedIndex}`} className="feeds" onClick={(e) => setUpdateData(feed.items)}>
               { feed.title}
             </div>
             

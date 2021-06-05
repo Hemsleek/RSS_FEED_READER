@@ -25,3 +25,10 @@ button{
   cursor: pointer;
   cursor:
 }
+.feeds{
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  row-gap: 2rem;
+  background-color: antiquewhite;
+}
